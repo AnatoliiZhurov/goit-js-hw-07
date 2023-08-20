@@ -57,16 +57,19 @@ function handlerImgClick(evt) {
   lightboxInstance.show();
 
   lightboxInstance.element().addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", closeByEscape);
 }
 
 function closeLightbox() {
-  if (lightboxInstance.visible()) {
-    lightboxInstance.close();
-  }
+  lightboxInstance.close();
+  lightboxInstance.element().removeEventListener("click", closeLightbox);
+  document.removeEventListener("keydown", closeByEscape);
 }
 
-document.addEventListener("keydown", (event) => {
-  if (event.code === "Escape" && lightboxInstance.visible()) {
+function closeByEscape(event) {
+  if (event.code === "Escape") {
     lightboxInstance.close();
+    lightboxInstance.element().removeEventListener("click", closeLightbox);
+    document.removeEventListener("keydown", closeByEscape);
   }
-});
+}
