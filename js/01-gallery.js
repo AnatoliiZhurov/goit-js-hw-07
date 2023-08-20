@@ -58,8 +58,6 @@ function handlerImgClick(evt) {
 
   lightboxInstance.element().addEventListener("click", closeLightbox);
   document.addEventListener("keydown", closeByEscape);
-  const listenets = getEventListeners(lightboxInstance);
-  console.log(listenets);
 }
 
 function closeLightbox() {
