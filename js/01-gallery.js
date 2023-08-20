@@ -58,18 +58,23 @@ function handlerImgClick(evt) {
 
   lightboxInstance.element().addEventListener("click", closeLightbox);
   document.addEventListener("keydown", closeByEscape);
+  const listenets = getEventListeners(lightboxInstance);
+  console.log(listenets);
 }
 
 function closeLightbox() {
   lightboxInstance.close();
-  lightboxInstance.element().removeEventListener("click", closeLightbox);
-  document.removeEventListener("keydown", closeByEscape);
+  removeListeners();
 }
 
 function closeByEscape(event) {
   if (event.code === "Escape") {
     lightboxInstance.close();
-    lightboxInstance.element().removeEventListener("click", closeLightbox);
-    document.removeEventListener("keydown", closeByEscape);
+    removeListeners();
   }
+}
+
+function removeListeners() {
+  lightboxInstance.element().removeEventListener("click", closeLightbox);
+  document.removeEventListener("keydown", closeByEscape);
 }
